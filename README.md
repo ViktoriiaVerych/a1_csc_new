@@ -46,6 +46,6 @@
    - Client requests a list of files stored on the server.
    - Server compiles the list of files and sends it to the client.
 
-4. **Client sends `DELETE filename`:
+4. Client sends `DELETE filename`:
    - Client requests deletion of a specific file on the server.
    - Server deletes the file and confirms the deletion to the client.
