@@ -1,0 +1,7 @@
+﻿  server_n.cpp
+C:\Users\Admin\source\repos\server_n\server_n\server_n.cpp(33,55): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Admin\source\repos\server_n\server_n\server_n.cpp(40,53): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Admin\source\repos\server_n\server_n\server_n.cpp(48,62): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Admin\source\repos\server_n\server_n\server_n.cpp(57,53): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\Admin\source\repos\server_n\server_n\server_n.cpp(158,57): warning C4267: аргумент: преобразование из "size_t" в "int"; возможна потеря данных
+  server_n.vcxproj -> C:\Users\Admin\source\repos\server_n\x64\Debug\server_n.exe
