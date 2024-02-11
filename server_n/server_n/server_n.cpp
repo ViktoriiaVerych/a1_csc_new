@@ -22,7 +22,6 @@ void sendFileList(SOCKET clientSocket) {
                 files.push_back(fileData.cFileName);
             }
         } while (FindNextFileA(hFind, &fileData));
-
         FindClose(hFind);
     }
 
@@ -36,7 +35,7 @@ void sendFileList(SOCKET clientSocket) {
 void sendFile(SOCKET clientSocket, const std::string& filename) {
     std::ifstream file(SERVER_DIR + filename, std::ios::binary | std::ios::ate);
     if (!file.is_open()) {
-        std::string error = "File does not exist";
+        std::string error = "file does not exist";
         send(clientSocket, error.c_str(), error.size(), 0);
         return;
     }
@@ -53,7 +52,7 @@ void sendFile(SOCKET clientSocket, const std::string& filename) {
 void receiveFile(SOCKET clientSocket, const std::string& filename) {
     std::ofstream file(SERVER_DIR + filename, std::ios::binary);
     if (!file.is_open()) {
-        std::string error = "Error creating file";
+        std::string error = "error creating file";
         send(clientSocket, error.c_str(), error.size(), 0);
         return;
     }
@@ -70,7 +69,7 @@ void receiveFile(SOCKET clientSocket, const std::string& filename) {
 void deleteFile(const std::string& filename) {
     std::string filePath = SERVER_DIR + filename;
     if (remove(filePath.c_str()) != 0) {
-        std::cerr << "Error deleting file: " << filename << std::endl;
+        std::cerr << "error deleting file: " << filename << std::endl;
     }
 }
 
@@ -79,7 +78,7 @@ int main()
     WSADATA wsaData;
     if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
     {
-        std::cerr << "WSAStartup failed" << std::endl;
+        std::cerr << "fail" << std::endl;
         return 1;
     }
 
@@ -87,7 +86,7 @@ int main()
     SOCKET serverSocket = socket(AF_INET, SOCK_STREAM, 0);
     if (serverSocket == INVALID_SOCKET)
     {
-        std::cerr << "Error creating socket: " << WSAGetLastError() << std::endl;
+        std::cerr << "error creating socket" << WSAGetLastError() << std::endl;
         WSACleanup();
         return 1;
     }
@@ -99,7 +98,7 @@ int main()
 
     if (bind(serverSocket, reinterpret_cast<sockaddr*>(&serverAddr), sizeof(serverAddr)) == SOCKET_ERROR)
     {
-        std::cerr << "Bind failed with error: " << WSAGetLastError() << std::endl;
+        std::cerr << "bind error" << WSAGetLastError() << std::endl;
         closesocket(serverSocket);
         WSACleanup();
         return 1;
@@ -107,18 +106,18 @@ int main()
 
     if (listen(serverSocket, SOMAXCONN) == SOCKET_ERROR)
     {
-        std::cerr << "Listen failed with error: " << WSAGetLastError() << std::endl;
+        std::cerr << "listen failed with error: " << WSAGetLastError() << std::endl;
         closesocket(serverSocket);
         WSACleanup();
         return 1;
     }
 
-    std::cout << "Server listening on port " << port << std::endl;
+    std::cout << "server listening on port " << port << std::endl;
 
     SOCKET clientSocket = accept(serverSocket, nullptr, nullptr);
     if (clientSocket == INVALID_SOCKET)
     {
-        std::cerr << "Accept failed with error: " << WSAGetLastError() << std::endl;
+        std::cerr << "accept failed with error: " << WSAGetLastError() << std::endl;
         closesocket(serverSocket);
         WSACleanup();
         return 1;
@@ -129,7 +128,7 @@ int main()
     int bytesReceived = recv(clientSocket, buffer, sizeof(buffer), 0);
     if (bytesReceived > 0)
     {
-        std::cout << "Received data: " << buffer << std::endl;
+        std::cout << "received data:" << buffer << std::endl;
 
         std::istringstream iss(buffer);
         std::string command;
