@@ -29,7 +29,15 @@ void sendFileList(SOCKET clientSocket) {
         fileList += file + "\n";
     }
 
-    send(clientSocket, fileList.c_str(), fileList.size(), 0);
+    int bytesSent = send(clientSocket, fileList.c_str(), fileList.size(), 0);
+    if (bytesSent == SOCKET_ERROR)
+    {
+        std::cerr << "send failed with error: " << WSAGetLastError() << std::endl;
+    }
+    else
+    {
+        std::cout << "Sent " << bytesSent << " bytes" << std::endl;
+    }
 }
 
 void sendFile(SOCKET clientSocket, const std::string& filename) {
@@ -44,7 +52,15 @@ void sendFile(SOCKET clientSocket, const std::string& filename) {
 
     std::vector<char> fileBuffer(fileSize);
     if (file.read(fileBuffer.data(), fileSize)) {
-        send(clientSocket, fileBuffer.data(), fileBuffer.size(), 0);
+        int bytesSent = send(clientSocket, fileBuffer.data(), fileBuffer.size(), 0);
+        if (bytesSent == SOCKET_ERROR)
+        {
+            std::cerr << "send failed with error: " << WSAGetLastError() << std::endl;
+        }
+        else
+        {
+            std::cout << "Sent " << bytesSent << " bytes" << std::endl;
+        }
     }
     file.close();
 }
@@ -59,11 +75,14 @@ void receiveFile(SOCKET clientSocket, const std::string& filename) {
 
     char buffer[1024];
     int bytesRead;
+    int totalBytesRead = 0;
     while ((bytesRead = recv(clientSocket, buffer, sizeof(buffer), 0)) > 0) {
         file.write(buffer, bytesRead);
+        totalBytesRead += bytesRead;
     }
 
     file.close();
+    std::cout << "Received " << totalBytesRead << " bytes" << std::endl;
 }
 
 void deleteFile(const std::string& filename) {

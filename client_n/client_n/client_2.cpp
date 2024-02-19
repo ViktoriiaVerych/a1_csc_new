@@ -15,14 +15,11 @@ void receiveFile(SOCKET serverSocket, const std::string& filename) {
 
     char buffer[1024];
     int bytesRead;
-    int totalBytesRead = 0;
     while ((bytesRead = recv(serverSocket, buffer, sizeof(buffer), 0)) > 0) {
         file.write(buffer, bytesRead);
-        totalBytesRead += bytesRead;
     }
 
     file.close();
-    std::cout << "Received " << totalBytesRead << " bytes" << std::endl;
 }
 
 int main()

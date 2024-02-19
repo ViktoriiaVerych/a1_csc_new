@@ -1,0 +1,3 @@
+C:/Users/Admin/source/repos/client_n/cmake-build-debug/CMakeFiles/client_n.dir
+C:/Users/Admin/source/repos/client_n/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Admin/source/repos/client_n/cmake-build-debug/CMakeFiles/rebuild_cache.dir
